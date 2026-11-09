@@ -21,3 +21,13 @@ COURSE_BOLT_PORT="${COURSE_BOLT_PORT:-7687}"
 COURSE_HTTP_PORT="${COURSE_HTTP_PORT:-7474}"
 
 PLUGIN_NAMESPACE="sentiment.*"
+
+# Starts Neo4j in its own session where possible, so that it keeps running
+# after the terminal or the Codespace lifecycle command that started it exits.
+start_neo4j() {
+  if command -v setsid > /dev/null 2>&1; then
+    setsid "$COURSE_NEO4J_HOME/bin/neo4j" start < /dev/null > /dev/null 2>&1 || true
+  else
+    "$COURSE_NEO4J_HOME/bin/neo4j" start > /dev/null 2>&1 || true
+  fi
+}

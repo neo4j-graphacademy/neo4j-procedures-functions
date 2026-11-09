@@ -11,6 +11,7 @@
     }
   },
   "postCreateCommand": "./scripts/setup-neo4j.sh && ./mvnw -B -q dependency:go-offline",
+  "postStartCommand": "./scripts/setup-neo4j.sh",
   "forwardPorts": [
     7474,
     7687

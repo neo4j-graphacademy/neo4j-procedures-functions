@@ -27,6 +27,6 @@ set_conf() {
 set_conf "server.bolt.listen_address" ":$COURSE_BOLT_PORT"
 set_conf "server.http.listen_address" ":$COURSE_HTTP_PORT"
 
-"$COURSE_NEO4J_HOME/bin/neo4j" start || true
+start_neo4j
 "$REPO_ROOT/scripts/wait-for-neo4j.sh"
 echo "Neo4j is running."

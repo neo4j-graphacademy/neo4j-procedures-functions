@@ -30,6 +30,6 @@ mv "$conf.tmp" "$conf"
 echo "dbms.security.procedures.allowlist=$PLUGIN_NAMESPACE" >> "$conf"
 echo "Allowlisted $PLUGIN_NAMESPACE"
 
-"$COURSE_NEO4J_HOME/bin/neo4j" start
+start_neo4j
 "$REPO_ROOT/scripts/wait-for-neo4j.sh"
 echo "Neo4j restarted with the new plugin."
