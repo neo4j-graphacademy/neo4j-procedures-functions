@@ -2,10 +2,20 @@
   "name": "Neo4j procedures and functions",
   "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
   "postCreateCommand": "./scripts/setup-neo4j.sh && ./mvnw -B -q dependency:go-offline",
-  "forwardPorts": [7474, 7687],
+  "forwardPorts": [
+    7474,
+    7687
+  ],
   "customizations": {
     "vscode": {
-      "extensions": ["vscjava.vscode-java-pack"]
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/sshd:1": {
+      "version": "latest"
     }
   }
 }
