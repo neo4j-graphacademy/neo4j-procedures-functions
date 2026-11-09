@@ -1,5 +1,7 @@
 package sentiment;
 
+import com.vader.sentiment.analyzer.SentimentAnalyzer;
+import com.vader.sentiment.analyzer.SentimentPolarities;
 import java.util.Map;
 import org.neo4j.procedure.Description;
 import org.neo4j.procedure.Name;
