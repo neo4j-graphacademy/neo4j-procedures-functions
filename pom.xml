@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.neo4j.graphacademy</groupId>
+    <artifactId>sentiment-plugin</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>GraphAcademy Sentiment Plugin</name>
+    <description>Neo4j functions, procedures and aggregations for the GraphAcademy course Building custom Functions and Procedures</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <neo4j.version>2026.10.2</neo4j.version>
+        <neo4j-driver.version>6.3.0</neo4j-driver.version>
+    </properties>
+
+    <!-- tag::repositories[] -->
+    <!-- VaderSentimentJava is published through JitPack, not Maven Central -->
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <!-- end::repositories[] -->
+
+    <dependencies>
+        <!-- tag::neo4j-api[] -->
+        <!-- provided: Neo4j already has its own API at runtime, so it is not bundled in the jar -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>${neo4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- end::neo4j-api[] -->
+
+        <dependency>
+            <groupId>com.github.apanimesh061</groupId>
+            <artifactId>VaderSentimentJava</artifactId>
+            <version>v1.1.1</version>
+        </dependency>
+
+        <!-- Test dependencies. neo4j-harness brings the JUnit version it needs. -->
+        <dependency>
+            <groupId>org.neo4j.test</groupId>
+            <artifactId>neo4j-harness</artifactId>
+            <version>${neo4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>${neo4j-driver.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
+            </plugin>
+            <!-- tag::shade[] -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.commons.lang3</pattern>
+                                    <shadedPattern>sentiment.shaded.org.apache.commons.lang3</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.neo4j:*</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- end::shade[] -->
+        </plugins>
+    </build>
+</project>
