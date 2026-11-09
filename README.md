@@ -36,8 +36,9 @@ Open the repository in a GitHub Codespace and the setup runs for you.
 ./mvnw test -Dtest=ScoreTest           # run the tests for one class
 ./mvnw clean package -DskipTests       # build the shaded jar
 ./scripts/deploy.sh                    # copy the jar, set the allowlist, restart Neo4j
+./scripts/ship.sh                      # build the jar, then deploy it
 ./scripts/cypher.sh "RETURN 1"         # run a Cypher statement
-./scripts/load-data.sh                 # reload the stocks and headlines
+./scripts/load-data.sh                 # clear and reload the stocks and headlines (no scores)
 ./scripts/solve.sh Score               # copy a finished solution into src/
 ```
 

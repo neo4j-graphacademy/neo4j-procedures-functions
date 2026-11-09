@@ -29,4 +29,13 @@ set_conf "server.http.listen_address" ":$COURSE_HTTP_PORT"
 
 start_neo4j
 "$REPO_ROOT/scripts/wait-for-neo4j.sh"
+
+# Load the course data the first time, so the challenges find the headlines.
+# Later runs leave the data alone, including any scores you have written.
+headlines="$("$REPO_ROOT/scripts/cypher.sh" "MATCH (h:Headline) RETURN count(h) AS headlines" | tail -n 1)"
+if [ "$headlines" = "0" ]; then
+  "$REPO_ROOT/scripts/load-data.sh" > /dev/null
+  echo "Loaded the stocks and headlines."
+fi
+
 echo "Neo4j is running."
