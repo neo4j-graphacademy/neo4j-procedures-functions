@@ -40,6 +40,7 @@ Open the repository in a GitHub Codespace and the setup runs for you.
 ./scripts/cypher.sh "RETURN 1"         # run a Cypher statement
 ./scripts/load-data.sh                 # clear and reload the stocks and headlines (no scores)
 ./scripts/solve.sh Score               # copy a finished solution into src/
+./scripts/stop-neo4j.sh                # stop the Neo4j in .neo4j/
 ```
 
 The scripts only use the Neo4j in `.neo4j/`. They ignore `NEO4J_*` environment
@@ -51,3 +52,21 @@ The ports are read each time a script runs, so set the same variables in every
 terminal you use.
 
 The local Neo4j user is `neo4j` and the password is `password`.
+
+## Clean up
+
+Everything the project installs is inside the repository folder: the Neo4j
+download, its data and the Maven build output. To remove a local copy, stop
+Neo4j first, then delete the folder:
+
+```bash
+./scripts/stop-neo4j.sh
+cd ..
+rm -rf neo4j-procedures-functions
+```
+
+If you delete the folder while Neo4j is running, the process keeps running and
+holds its ports. Stop it with `./scripts/stop-neo4j.sh` before you delete.
+
+To remove a Codespace, open <https://github.com/codespaces>, select the menu
+next to the Codespace and choose Delete.
