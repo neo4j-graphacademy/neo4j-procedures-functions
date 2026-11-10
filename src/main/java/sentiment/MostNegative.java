@@ -15,7 +15,9 @@ public class MostNegative {
     }
 
     public static class MostNegativeAggregator {
+        private final Score scorer = new Score();
         private String worstText;
+        private double worstScore = Double.MAX_VALUE;
 
         @UserAggregationUpdate
         public void update(@Name("text") String text) {

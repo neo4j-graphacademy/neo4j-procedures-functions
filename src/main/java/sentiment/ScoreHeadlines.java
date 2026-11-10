@@ -1,5 +1,6 @@
 package sentiment;
 
+import java.util.Map;
 import java.util.stream.Stream;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
