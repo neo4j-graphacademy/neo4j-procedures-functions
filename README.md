@@ -29,6 +29,13 @@ The project structure follows the
 
 Open the repository in a GitHub Codespace and the setup runs for you.
 
+If you clone the repository to your own machine, note that
+`./scripts/setup-neo4j.sh` downloads and installs a copy of Neo4j. The download
+is about 235 MB and the unpacked copy takes about 270 MB, all inside the
+repository folder. The first build also downloads Maven and the project's
+dependencies. The copy is separate from any Neo4j you already have. See
+[Clean up](#clean-up) to stop and remove it.
+
 ## Commands
 
 ```bash
