@@ -77,3 +77,9 @@ holds its ports. Stop it with `./scripts/stop-neo4j.sh` before you delete.
 
 To remove a Codespace, open <https://github.com/codespaces>, select the menu
 next to the Codespace and choose Delete.
+
+## License
+
+This project is released under the [MIT License](LICENSE). Its structure follows
+the [neo4j-procedure-template](https://github.com/neo4j-examples/neo4j-procedure-template),
+which is released under the Apache License 2.0.
